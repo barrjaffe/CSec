@@ -1,0 +1,41 @@
+trigger:
+  - main
+  - develop
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  terraformVersion: '1.6.6'
+  azureSubscription: 'my-subscription'
+
+steps:
+  - task: AzureCLI@2
+    displayName: Validate Azure login
+    inputs:
+      azureSubscription: '$(azureSubscription)'
+      scriptType: bash
+      scriptLocation: inlineScript
+      inlineScript: |
+        az account show
+
+  - task: TerraformInstaller@1
+    displayName: Install Terraform
+    inputs:
+      terraformVersion: '$(terraformVersion)'
+
+  - script: |
+      terraform init -backend=false
+      terraform validate
+    displayName: Terraform validation
+
+  - script: |
+      echo "Run security scans here"
+      echo "- dependency scan"
+      echo "- secret scan"
+      echo "- static analysis"
+    displayName: Security pipeline checks
+
+  - script: |
+      echo "Deploy to dev/test/staging environment using Terraform and app release steps"
+    displayName: Deployment placeholder
