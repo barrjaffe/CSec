@@ -13,10 +13,12 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name  = "tfstate-rg"
-    storage_account_name = "tfstateaccount"
-    container_name       = "tfstate"
-    key                  = "cyber-platform.tfstate"
+    # TODO: Replace with your actual state storage account details
+    # resource_group_name  = "your-tfstate-rg"
+    # storage_account_name = "yourtfstateaccount"
+    # container_name       = "tfstate"
+    # key                  = "cyber-platform.tfstate"
+    # Alternatively, use: terraform init -backend-config="..." to configure dynamically
   }
 }
 

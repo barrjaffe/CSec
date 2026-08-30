@@ -134,6 +134,43 @@ resource "azurerm_postgresql_flexible_server" "main" {
   depends_on = [azurerm_subnet.app]
 }
 
+# TODO: Add private endpoint for PostgreSQL
+# resource "azurerm_private_endpoint" "postgres" {
+#   name                = "${local.resource_prefix}-psql-pe"
+#   location            = azurerm_resource_group.main.location
+#   resource_group_name = azurerm_resource_group.main.name
+#   subnet_id           = azurerm_subnet.app.id
+#   private_service_connection {
+#     name                           = "${local.resource_prefix}-psql-psc"
+#     private_connection_resource_id = azurerm_postgresql_flexible_server.main.id
+#     subresource_names              = ["postgresqlServer"]
+#     is_manual_connection           = false
+#   }
+# }
+
+# TODO: Add Session Database (temporary schema per run) — Consider isolated PostgreSQL or separate database in main instance
+# resource "azurerm_postgresql_flexible_server_database" "session_db" {
+#   name              = "session_db"
+#   server_id         = azurerm_postgresql_flexible_server.main.id
+#   charset           = "UTF8"
+#   collation         = "en_US.utf8"
+# }
+
+# TODO: Add Report Index Database (or dedicated schema)
+# resource "azurerm_postgresql_flexible_server_database" "report_index_db" {
+#   name              = "report_index_db"
+#   server_id         = azurerm_postgresql_flexible_server.main.id
+#   charset           = "UTF8"
+#   collation         = "en_US.utf8"
+# }
+
+# TODO: Add Azure Front Door or Application Gateway for WAF and DDoS protection
+# resource "azurerm_frontdoor" "main" {
+#   name                             = "${local.resource_prefix}-fd"
+#   resource_group_name              = azurerm_resource_group.main.name
+#   enforce_backend_pools_certificate_name_check = true
+# }
+
 data "azurerm_client_config" "current" {}
 
 output "resource_group_name" {

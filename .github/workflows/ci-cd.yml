@@ -42,8 +42,10 @@ jobs:
 
       - name: Lint and unit tests
         run: |
-          echo "Run Python linting and tests"
-          echo "Run Angular linting and tests"
+          echo "TODO: Run Python linting (pylint, flake8)"
+          echo "TODO: Run Python unit tests (pytest)"
+          echo "TODO: Run Angular linting (ng lint)"
+          echo "TODO: Run Angular unit tests (ng test)"
 
   security-checks:
     runs-on: ubuntu-latest
@@ -54,15 +56,15 @@ jobs:
 
       - name: Dependency vulnerability scan
         run: |
-          echo "Run dependency vulnerability scan"
+          echo "TODO: Run dependency vulnerability scan (pip audit, npm audit, Dependabot, etc.)"
 
       - name: Secret scanning
         run: |
-          echo "Run secret scanner"
+          echo "TODO: Run secret scanner (truffleHog, git-secrets, or GitHub's native secret scanning)"
 
       - name: IaC validation
         run: |
-          echo "Run Terraform validate"
+          echo "TODO: Run Terraform validate and checkov for IaC security scanning"
 
   terraform-plan:
     runs-on: ubuntu-latest
@@ -90,7 +92,7 @@ jobs:
       - name: Terraform plan
         run: |
           cd devops/terraform
-          echo "Run terraform plan for target environment"
+          echo "TODO: Run terraform plan for target environment (dev, test, demo)"
 
   deploy-dev:
     runs-on: ubuntu-latest
@@ -100,7 +102,7 @@ jobs:
     steps:
       - name: Deploy to Dev
         run: |
-          echo "Deploy to Azure Dev environment"
+          echo "TODO: Deploy to Azure Dev environment (terraform apply, container push, app deployment)"
 
   deploy-demo:
     runs-on: ubuntu-latest
@@ -110,4 +112,4 @@ jobs:
     steps:
       - name: Deploy to Demo
         run: |
-          echo "Deploy to Azure Demo environment"
+          echo "TODO: Deploy to Azure Demo environment (terraform apply, container push, app deployment)"

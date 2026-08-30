@@ -45,8 +45,8 @@ variable "database_admin_login" {
 }
 
 variable "database_admin_password" {
-  description = "Database admin password for the PostgreSQL instance"
+  description = "Database admin password for the PostgreSQL instance (must be set via environment or pipeline)"
   type        = string
-  default     = "ChangeMe123!"
   sensitive   = true
+  # NOTE: Do not set a default value. Pass via TF_VAR_database_admin_password or pipeline secret.
 }
